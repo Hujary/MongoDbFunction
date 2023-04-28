@@ -12,7 +12,11 @@
 
     <div id="list">
       <button @click="axiosGetCall"> Get all names </button>
-      <p></p>
+      <p>
+        {{this.UserData[0]}}
+        {{ this.UserData[1] }}
+
+      </p>
     </div>
 
   </div>
@@ -30,6 +34,8 @@ export default{
       inputName: "",
       postbool: "",
       confirmation: "",
+
+      UserData: [],
 
     }
   },
@@ -64,7 +70,12 @@ export default{
     await axios.get('https://mongodbworkshop.azurewebsites.net/api/testfunction').then((response) => {
       let data = response;
       console.log(data);
+      this.UserData[0] = data.data[0];
+    this.UserData[1] = data.data[1];
+    console.log(this.UserData);
     })
+ 
+
     },
 
 
