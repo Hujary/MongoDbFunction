@@ -12,7 +12,7 @@
 
     <div id="list">
       <button @click="axiosGetCall"> Get all names </button>
-      <p>
+      <p v-if="visible">
         {{this.UserData[0]}}
         {{ this.UserData[1] }}
 
@@ -37,6 +37,7 @@ export default{
 
       UserData: [],
 
+      visible: false,
     }
   },
   methods: {
@@ -75,7 +76,7 @@ export default{
     console.log(this.UserData);
     })
  
-
+    this.visible= !this.visible;
     },
 
 
