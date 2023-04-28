@@ -1,13 +1,22 @@
-<template>
-  <div id="login">
-    <input v-model="inputEmail" placeholder="enter your Email" />
-    <input v-model="inputName" placeholder="enter your Name" />
-    <button @click="axiosApiCall">  Press me  </button>
+<template> 
+
+  <div id="apps">
+    
+    <div id="login">
+      <span id="text">Sign in</span>
+      <input id="mail" v-model="inputEmail" placeholder="Email" />
+      <input id="name" v-model="inputName" placeholder="Name" />
+      <button id="send" @click="axiosApiCall">  Send Data  </button>
+      <span>{{ this.confirmation }}</span>
+    </div>
+
+    <div id="list">
+      <button @click="axiosGetCall"> Get all names </button>
+      <p></p>
+    </div>
+
   </div>
-  <div>
-    <button @click="axiosGetCall"> Get all names </button>
-    <p></p>
-  </div>
+
 </template>
 
 <script>
@@ -18,7 +27,10 @@ export default{
   data(){
     return{
       inputEmail: "",
-      inputName: ""
+      inputName: "",
+      postbool: "",
+      confirmation: "",
+
     }
   },
   methods: {
@@ -31,7 +43,19 @@ export default{
     }).then((response) => {
        let info = response;
        console.log(info);
+       let type = response.data;
+       this.postbool = type;
+       console.log(this.postbool);
      })
+
+     if(this.postbool==true){
+      this.confirmation = "Daten wurden gespeichert";
+     }else{
+      this.confirmation = "Es gab einen Fehler";
+     }
+
+     this.inputEmail="";
+     this.inputName="";
 
     },
 
@@ -41,21 +65,59 @@ export default{
       let data = response;
       console.log(data);
     })
-    }
+    },
+
 
   }
 }
 </script>
 
-<style scoped>
+<style>
+
+#apps{
+  display: flex;
+  flex-direction: row;
+}
 
 #login{
- 
-display: flex;
-flex-direction: column;
-width: 50%;
-padding-left: 150px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 300px;
+  padding-left: 150px;
+}
 
+#list{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  padding-left: 200px;
+}
+
+#mail{
+  padding-top: 10px;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-top: 70px;
+}
+
+#name{
+  padding-top: 10px;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+#send{
+  height: 40px;
+  margin-top: 20px;
+}
+
+#text{
+  text-align: center;
+  padding-top: 20px;
+  font-size: xx-large;
 }
 
 </style>
