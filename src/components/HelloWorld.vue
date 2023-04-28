@@ -8,7 +8,7 @@
 <script>
 import axios from 'axios'
 
-export default {
+export default{
   name: 'HelloWorld',
   data(){
     return{
