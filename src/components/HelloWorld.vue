@@ -21,7 +21,8 @@ export default{
    async axiosApiCall(){
         // Post Request
     await axios.post('https://mongodbworkshop.azurewebsites.net/api/testfunction', {
-      name: this.inputName, 
+      name: this.inputName,
+      email: this.inputEmail, 
 
     }).then((response) => {
        let info = response
